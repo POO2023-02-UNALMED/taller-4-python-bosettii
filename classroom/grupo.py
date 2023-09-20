@@ -1,9 +1,14 @@
 from classroom.asignatura import Asignatura
-from multimethod import multimethod
+#from multimethod import multimethod
 class Grupo:
-    grado = 12
+    grado = "grado 12"
 
-    def __init__(self, grupo="grupo predeterminado", asignaturas=[],estudiantes =[] ):
+    def __init__(self, grupo="grupo predeterminado", asignaturas=None,estudiantes =None ):
+        if estudiantes == None:
+            estudiantes = []
+        if asignaturas == None:
+            asignaturas = []
+
         self._grupo = grupo
         self._asignaturas = asignaturas
         self.listadoAlumnos = estudiantes
@@ -18,21 +23,14 @@ class Grupo:
         lista.append(alumno)
         self.listadoAlumnos = self.listadoAlumnos + lista
 
-    @multimethod
-    def __str__(self,x) -> None:
-        return "Grupo de estudiantes: " + self._grupo
-    
-    @multimethod
-    def __str__(self,x: int) -> None:
-        return "Grado: " + str(x)
+    def __str__(self) :
+        return f"Grupo de estudiantes: {self._grupo}"
     
     @ classmethod
     def asignarNombre(cls, nombre="Grado 10"):
         cls.grado = nombre
 
     @ classmethod
-    def asignarNombre(cls, nombre="Grado 4"):
-        cls.grado = nombre
-    @ classmethod
     def asignarNombre(cls, nombre="Grado 6"):
         cls.grado = nombre
+
